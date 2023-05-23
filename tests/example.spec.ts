@@ -4,7 +4,7 @@ import { ApparelAndAccessories } from '../page_objects/ApparelAndAccessories';
 import { Tshirts } from '../page_objects/Tshirts';
 import { ProductPage } from '../page_objects/ProductPage';
 
-test.only('test', async ({ page }) => {
+test.only('3 items to buy', async ({ page }) => {
   const mainPage = new MainPage(page);
   const apparelAndAccessories = new ApparelAndAccessories(page);
   const tshirts = new Tshirts(page);
@@ -14,7 +14,11 @@ test.only('test', async ({ page }) => {
   await mainPage.ClickHomeButton();
   await mainPage.GoToApparelAndAccessories();
   await apparelAndAccessories.GoToSubcategoryTshirts();
-  await tshirts.page.locator('.grid').getByText('T-SHIRT', { exact: true }).first().click();
+  await tshirts.page.locator('.grid')
+    .filter({ hasText: 'T-Shirt'})
+    //.filter({ hasNotText: 'T-Shirts'})
+    .filter({ has: page.locator('.productcart') })
+    .click();
   await productPage.AddToCart();
 
 });
