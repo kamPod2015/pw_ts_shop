@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from '@playwright/test';
 
 export class MainPage {
   readonly page: Page;
@@ -9,11 +9,13 @@ export class MainPage {
   constructor(page: Page) {
     this.page = page;
     this.homeButton = page.getByRole('link', { name: 'Home' });
-    this.apparelAndaccessories = page.getByRole('link', { name: 'Apparel & accessories' });
+    this.apparelAndaccessories = page.getByRole('link', {
+      name: 'Apparel & accessories',
+    });
   }
 
   async GoTo() {
-    await this.page.goto("https://automationteststore.com/");
+    await this.page.goto('https://automationteststore.com/');
     await expect(this.page).toHaveURL(/automationteststore.com/);
   }
 
